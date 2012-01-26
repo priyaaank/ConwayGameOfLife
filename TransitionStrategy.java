@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class TransitionStrategy {
   
   private List<Rule> transitionRules;
@@ -7,7 +9,7 @@ public class TransitionStrategy {
   }
 
   public void nextGeneration(Colony grid) {
-    List<Cells> cells = grid.getCells();
+    List<Cell> cells = grid.getCells();
     for(Cell currentCell : cells) {
       applyTransitionRules(currentCell);
     }
