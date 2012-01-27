@@ -7,6 +7,7 @@ public class Colony {
   private int gridHeight;
 
   private TransitionStrategy transitionStrategy;
+  private GridPrintStrategy printStrategy;
 
   private Cell[][] grid;
   private List<Cell> cells;
@@ -15,6 +16,7 @@ public class Colony {
     this.gridWidth  = gridWidth;
     this.gridHeight = gridHeight;
     this.transitionStrategy = transitionStrategy;
+    this.printStrategy = new GridPrintStrategy(this);
     this.cells = new ArrayList<Cell>();
     grid = new Cell[gridHeight][gridWidth];
     this.allocateCells();
@@ -26,6 +28,26 @@ public class Colony {
 
   public List<Cell> getCells() {
     return cells;
+  }
+
+  public void display() {
+    printStrategy.print();
+  }
+
+  public int width() {
+    return this.gridWidth;
+  }
+
+  public int height() {
+    return this.gridHeight;
+  }
+
+  public boolean isLivePosition(int xCord, int yCord) {
+    return grid[xCord][yCord].isAlive() ? true : false;
+  }
+
+  public void resurrectAtPosition(int xCord, int yCord) {
+    grid[xCord][yCord].initiateResurrection().commitTransition();
   }
 
   private void allocateCells() {
